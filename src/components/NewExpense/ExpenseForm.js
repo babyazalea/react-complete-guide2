@@ -24,7 +24,7 @@ const ExpenseForm = (props) => {
       });
     } else if (name === "date") {
       setUserInput((prevState) => {
-        return { ...prevState, date: new Date(value) };
+        return { ...prevState, date: value };
       });
     }
   };
@@ -32,7 +32,14 @@ const ExpenseForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    props.onSaveExpenseData(userInput);
+    const newExpense = {
+      title: userInput.title,
+      amount: userInput.amount,
+      date: new Date(userInput.date),
+    };
+
+    props.onSaveExpenseData(newExpense);
+
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
